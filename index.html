@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Золотая Звезда | База отдыха на озере Белё</title>
+
+    <!-- SEO Meta -->
+    <meta
+      name="description"
+      content="База отдыха Золотая Звезда в Хакасии на берегу озера Белё. Уютные номера, кедровая баня, рыбалка, детская площадка. Бронирование +7 (901) 235-80-02"
+    />
+    <meta
+      name="keywords"
+      content="база отдыха Хакасия, озеро Белё, Золотая Звезда, отдых в Хакасии, кедровая баня"
+    />
+    <link rel="canonical" href="https://bele-star.ru" />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Золотая Звезда - База отдыха на озере Белё"
+    />
+    <meta
+      property="og:description"
+      content="Приглашаем отдохнуть в Хакасии! Уютные номера, баня, мангал, свежий воздух."
+    />
+    <meta
+      property="og:image"
+      content="https://bele-star.ru/images/og-image.jpg"
+    />
+    <meta property="og:url" content="https://bele-star.ru" />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>"
+    />
+
+    <!-- Preconnect for fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Flatpickr (для красивых дат) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css"
+    />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="header" role="banner">
+      <div class="container">
+        <a href="/" class="logo" aria-label="Золотая Звезда - главная">
+          <span>Золотая</span> Звезда
+        </a>
+
+        <nav class="nav" role="navigation" aria-label="Главное меню">
+          <ul class="nav-list">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#gallery">Галерея</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a href="tel:+79012358002" class="phone-link" aria-label="Позвонить">
+            <i class="fas fa-phone"></i>
+            <span>+7 (901) 235-80-02</span>
+          </a>
+          <button class="btn btn-primary btn-book open-modal">
+            <i class="fas fa-calendar-check"></i>
+            Забронировать
+          </button>
+          <button class="mobile-toggle" aria-label="Открыть меню">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source
+            src="https://www.w3schools.com/html/mov_bbb.mp4"
+            type="video/mp4"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&h=800&fit=crop&crop=center"
+            alt="Озеро Белё"
+          />
+        </video>
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-map-pin"></i> Хакасия, озеро Белё
+        </div>
+        <h1 class="hero-title">Приглашаем вас отдохнуть</h1>
+        <p class="hero-subtitle">В самом живописном месте Хакасии!</p>
+
+        <div class="hero-features">
+          <span class="feature"
+            ><i class="fas fa-umbrella-beach"></i> Большой пляж</span
+          >
+          <span class="feature"><i class="fas fa-fire"></i> Кедровые бани</span>
+          <span class="feature"><i class="fas fa-tree"></i> Мангалы</span>
+          <span class="feature"><i class="fas fa-ship"></i> Прокат</span>
+        </div>
+
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-lg open-modal">
+            <i class="fas fa-calendar-check"></i> Забронировать номер
+          </button>
+          <a href="#about" class="btn btn-outline btn-lg">
+            <i class="fas fa-chevron-down"></i> Узнать больше
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number" data-count="12">0</span>
+            <span class="stat-label">уютных номеров</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-count="150">0</span>
+            <span class="stat-label">довольных гостей</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-count="4.9">0</span>
+            <span class="stat-label">средний рейтинг</span>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="video-control"
+        id="videoControl"
+        aria-label="Управление видео"
+      >
+        <i class="fas fa-pause"></i>
+      </button>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about" id="about">
+      <div class="about-bg">
+        <img src="photo1.jpg" alt="Озеро Белё" loading="lazy" />
+        <div class="about-overlay"></div>
+      </div>
+      <div class="container">
+        <div class="section-header fade-on-scroll">
+          <span class="section-tag">О нас</span>
+          <h2 class="section-title">
+            <span class="gold-text">Золотая Звезда</span>
+            <span class="deep-text">на озере Белё</span>
+          </h2>
+          <p class="section-subtitle">
+            Уникальное место, где природа встречается с комфортом!
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text fade-left">
+            <p>
+              <strong>Золотая Звезда</strong> расположена поистине в самом
+              живописном заливе с самым большим, пологим и удобным пляжем.
+              Привнесенные на базу блага цивилизации, создающие комфорт, не
+              нарушают целостности природы и позволяют чувствовать себя с ней
+              единым целым.
+            </p>
+
+            <p>
+              На сегодняшний день озеро Беле является одним из самых популярных
+              мест отдыха. Это озеро – крупнейшее в Хакасии, оно расположено на
+              холмистых просторах Джиримской степи.
+            </p>
+
+            <div class="about-highlight">
+              <div class="highlight-item fade-on-scroll delay-1">
+                <i class="fas fa-water"></i>
+                <div>
+                  <h4>Западная часть</h4>
+                  <p>
+                    Пресная вода, разводят окуня, сига, пелядь, леща, форель и
+                    кету
+                  </p>
+                </div>
+              </div>
+              <div class="highlight-item fade-on-scroll delay-2">
+                <i class="fas fa-ship"></i>
+                <div>
+                  <h4>Восточная часть</h4>
+                  <p>Солёная вода, по составу близка к морской</p>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary open-modal fade-on-scroll delay-3">
+              Подробнее о нас
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-header fade-on-scroll">
+          <span class="section-tag">Услуги</span>
+          <h2 class="section-title">
+            Что мы можем вам <span>предложить?</span>
+          </h2>
+          <p class="section-subtitle">Всё для комфортного отдыха на природе</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card fade-on-scroll delay-1">
+            <div class="service-icon"><i class="fas fa-children"></i></div>
+            <h3>Детская площадка</h3>
+            <p>
+              Безопасная игровая зона для самых маленьких с современным
+              оборудованием
+            </p>
+            <span class="service-number">01</span>
+          </div>
+
+          <div class="service-card fade-on-scroll delay-2">
+            <div class="service-icon"><i class="fas fa-parking"></i></div>
+            <h3>Автопарковка</h3>
+            <p>Гарантированная стоянка автотранспорта на территории базы</p>
+            <span class="service-number">02</span>
+          </div>
+
+          <div class="service-card fade-on-scroll delay-3">
+            <div class="service-icon"><i class="fas fa-house-chimney"></i></div>
+            <h3>Уютные номера</h3>
+            <p>
+              Экологически чистый район на берегу озера с комфортными условиями
+            </p>
+            <span class="service-number">03</span>
+          </div>
+
+          <div class="service-card fade-on-scroll delay-4">
+            <div class="service-icon"><i class="fas fa-fire-burner"></i></div>
+            <h3>Кедровая баня</h3>
+            <p>Настоящая сибирская баня с ароматом кедра и целебным паром</p>
+            <span class="service-number">04</span>
+          </div>
+
+          <div class="service-card fade-on-scroll delay-5">
+            <div class="service-icon"><i class="fas fa-utensils"></i></div>
+            <h3>Мангал &amp; Шатёр</h3>
+            <p>Всё необходимое для пикника на свежем воздухе с друзьями</p>
+            <span class="service-number">05</span>
+          </div>
+
+          <div class="service-card fade-on-scroll delay-1">
+            <div class="service-icon"><i class="fas fa-fish"></i></div>
+            <h3>Рыбалка</h3>
+            <p>Отличный улов: форель, сиг, окунь, пелядь и другие виды рыб</p>
+            <span class="service-number">06</span>
+          </div>
+        </div>
+
+        <div class="services-cta fade-on-scroll delay-3">
+          <button class="btn btn-primary btn-lg open-modal">
+            <i class="fas fa-calendar-check"></i> Забронировать номер
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="section gallery" id="gallery">
+      <div class="container">
+        <div class="section-header fade-on-scroll">
+          <span class="section-tag">Галерея</span>
+          <h2 class="section-title">Фотографии <span>нашего рая</span></h2>
+          <p class="section-subtitle">Посмотрите, как красиво у нас</p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-item-large fade-on-scroll delay-1">
+            <video
+              class="gallery-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            >
+              <source src="video1.mp4" type="video/mp4" />
+            </video>
+            <div class="gallery-overlay">
+              <span>Озеро Белё</span>
+            </div>
+          </div>
+          <div class="gallery-item fade-on-scroll delay-2">
+            <img src="photo4.jpg" alt="Пляж" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>Пляж</span>
+            </div>
+          </div>
+          <div class="gallery-item fade-on-scroll delay-3">
+            <img
+              src="https://images.unsplash.com/photo-1542728925-21b7e99f1c8d?w=400&h=300&fit=crop&crop=center"
+              alt="Закат на озере"
+              loading="lazy"
+            />
+            <div class="gallery-overlay">
+              <span>Закаты</span>
+            </div>
+          </div>
+          <div class="gallery-item fade-on-scroll delay-4">
+            <img src="photo3.jpg" alt="Кедровая баня" loading="lazy" />
+            <div class="gallery-overlay">
+              <span>Кедровая баня</span>
+            </div>
+          </div>
+          <div class="gallery-item fade-on-scroll delay-5">
+            <img
+              src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300&fit=crop&crop=center"
+              alt="Природа Хакасии"
+              loading="lazy"
+            />
+            <div class="gallery-overlay">
+              <span>Природа</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-cta fade-on-scroll delay-3">
+          <a href="#" class="btn btn-outline-dark">Смотреть все фото</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REVIEWS ===== -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-header fade-on-scroll">
+          <span class="section-tag">Отзывы</span>
+          <h2 class="section-title">Что о нас <span>говорят</span></h2>
+          <p class="section-subtitle">Реальные отзывы наших гостей</p>
+        </div>
+
+        <div class="reviews-slider fade-on-scroll">
+          <div class="reviews-grid" id="reviewsGrid">
+            <div class="review-card fade-on-scroll delay-1">
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="review-text">
+                «Отдыхали семьёй — в восторге! Пляж пологий, вода чистая, номера
+                уютные. Кедровая баня — отдельное спасибо. Обязательно
+                вернёмся!»
+              </p>
+              <div class="review-author">
+                <div class="review-avatar">
+                  <img
+                    src="https://ui-avatars.com/api/?name=Elena&background=d4af37&color=fff&size=40"
+                    alt="Елена"
+                  />
+                </div>
+                <div>
+                  <div class="review-name">Елена</div>
+                  <div class="review-city">г. Красноярск</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card fade-on-scroll delay-2">
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="review-text">
+                «Лучшее место на Белё! Рыбачили, жарили мангал, дети на площадке
+                — всё супер. Природа невероятная, персонал приветливый.
+                Рекомендую!»
+              </p>
+              <div class="review-author">
+                <div class="review-avatar">
+                  <img
+                    src="https://ui-avatars.com/api/?name=Dmitry&background=d4af37&color=fff&size=40"
+                    alt="Дмитрий"
+                  />
+                </div>
+                <div>
+                  <div class="review-name">Дмитрий</div>
+                  <div class="review-city">г. Абакан</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-card fade-on-scroll delay-3">
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="review-text">
+                «Очень красивая природа, тишина, покой. Вода в восточной части
+                солёная — как на море. Отдыхали 10 дней, не хотели уезжать.
+                Спасибо!»
+              </p>
+              <div class="review-author">
+                <div class="review-avatar">
+                  <img
+                    src="https://ui-avatars.com/api/?name=Olga&background=d4af37&color=fff&size=40"
+                    alt="Ольга"
+                  />
+                </div>
+                <div>
+                  <div class="review-name">Ольга</div>
+                  <div class="review-city">г. Новосибирск</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta">
+      <div class="cta-bg">
+        <img
+          src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600&h=400&fit=crop&crop=center"
+          alt="Природа Хакасии"
+          loading="lazy"
+        />
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="container cta-content fade-on-scroll">
+        <h2><i class="fas fa-star gold"></i> Готовы отдохнуть?</h2>
+        <p>
+          Забронируйте номер прямо сейчас и получите скидку 10% на кедровую баню
+        </p>
+        <div class="cta-buttons">
+          <button
+            class="btn btn-primary btn-lg open-modal fade-on-scroll delay-1"
+          >
+            <i class="fas fa-calendar-check"></i> Забронировать номер
+          </button>
+          <a
+            href="tel:+79012358002"
+            class="btn btn-outline btn-lg fade-on-scroll delay-2"
+          >
+            <i class="fas fa-phone"></i> +7 (901) 235-80-02
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTS ===== -->
+    <section class="section contacts" id="contacts">
+      <div class="container">
+        <div class="section-header fade-on-scroll">
+          <span class="section-tag">Контакты</span>
+          <h2 class="section-title">Как нас <span>найти</span></h2>
+        </div>
+
+        <div class="contacts-grid">
+          <div class="contacts-info">
+            <div class="contact-item fade-on-scroll delay-1">
+              <div class="contact-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <h4>Телефон</h4>
+                <a href="tel:+79012358002">+7 (901) 235-80-02</a>
+                <a href="tel:+79134489999">+7 (913) 448-99-99</a>
+              </div>
+            </div>
+
+            <div class="contact-item fade-on-scroll delay-2">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:info@bele-star.ru">info@bele-star.ru</a>
+              </div>
+            </div>
+
+            <div class="contact-item fade-on-scroll delay-3">
+              <div class="contact-icon"><i class="fas fa-map-pin"></i></div>
+              <div>
+                <h4>Адрес</h4>
+                <p>Хакасия, озеро Белё,<br />база отдыха «Золотая Звезда»</p>
+              </div>
+            </div>
+
+            <div class="contact-item fade-on-scroll delay-4">
+              <div class="contact-icon"><i class="fas fa-clock"></i></div>
+              <div>
+                <h4>Режим работы</h4>
+                <p>Круглосуточно, бронирование 24/7</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contacts-map fade-left">
+            <div class="map-placeholder">
+              <i class="fas fa-map-marked-alt"></i>
+              <span>Карта: озеро Белё, Хакасия</span>
+              <small>52°27′N 90°8′E</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand fade-on-scroll delay-1">
+            <div class="logo">
+              <i class="fas fa-star"></i>
+              <span>Золотая</span> Звезда
+            </div>
+            <p>
+              База отдыха в Хакасии на берегу озера Белё. Тёплая атмосфера,
+              природа и комфорт для всей семьи.
+            </p>
+            <div class="footer-social">
+              <a href="#" aria-label="WhatsApp"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+              <a href="#" aria-label="Telegram"
+                ><i class="fab fa-telegram"></i
+              ></a>
+              <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col fade-on-scroll delay-2">
+            <h4>Информация</h4>
+            <ul>
+              <li><a href="#">Как нас найти</a></li>
+              <li><a href="#">Прайс</a></li>
+              <li><a href="#">Дополнительные услуги</a></li>
+              <li><a href="#">Правила проживания</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col fade-on-scroll delay-3">
+            <h4>О нас</h4>
+            <ul>
+              <li><a href="#">Контакты</a></li>
+              <li><a href="#">Наши вакансии</a></li>
+              <li><a href="#">Отзывы</a></li>
+              <li><a href="#">Галерея</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col fade-on-scroll delay-4">
+            <h4>Контакты</h4>
+            <ul class="footer-contacts">
+              <li>
+                <a href="tel:+79012358002"
+                  ><i class="fas fa-phone"></i> +7 (901) 235-80-02</a
+                >
+              </li>
+              <li>
+                <a href="tel:+79134489999"
+                  ><i class="fas fa-phone"></i> +7 (913) 448-99-99</a
+                >
+              </li>
+              <li>
+                <a href="mailto:info@bele-star.ru"
+                  ><i class="fas fa-envelope"></i> info@bele-star.ru</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom fade-on-scroll delay-5">
+          <span>© 2026 База отдыха «Золотая звезда»</span>
+          <span>Номер реестровой записи С192024006546</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+    <div class="modal-overlay" id="bookingModal">
+      <div class="modal">
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="modal-header">
+          <div class="modal-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h2 class="modal-title">Забронировать номер</h2>
+          <p class="modal-subtitle">
+            Заполните форму, и мы свяжемся с вами для подтверждения
+          </p>
+        </div>
+
+        <form class="modal-form" id="bookingForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">ФИО <span class="required">*</span></label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Иванов Иван Иванович"
+                required
+              />
+              <div class="error-message">Пожалуйста, введите ваше ФИО</div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Телефон <span class="required">*</span></label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+7 (900) 123-45-67"
+                required
+              />
+              <div class="error-message">
+                Пожалуйста, введите корректный номер телефона
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email"
+                >Эл. почта <span class="required">*</span></label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="example@mail.ru"
+                required
+              />
+              <div class="error-message">
+                Пожалуйста, введите корректный email
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="category"
+                >Категория номера <span class="required">*</span></label
+              >
+              <select id="category" name="category" required>
+                <option value="">Выберите категорию</option>
+                <option value="Эконом">Эконом</option>
+                <option value="Стандарт">Стандарт</option>
+                <option value="Комфорт">Комфорт</option>
+                <option value="Люкс">Люкс</option>
+                <option value="Семейный">Семейный</option>
+              </select>
+              <div class="error-message">
+                Пожалуйста, выберите категорию номера
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="adults"
+                >Количество взрослых <span class="required">*</span></label
+              >
+              <input
+                type="number"
+                id="adults"
+                name="adults"
+                min="1"
+                max="10"
+                value="2"
+                required
+              />
+              <div class="error-message">Укажите количество взрослых</div>
+            </div>
+
+            <div class="form-group">
+              <label for="children">Количество детей</label>
+              <input
+                type="number"
+                id="children"
+                name="children"
+                min="0"
+                max="10"
+                value="0"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="childrenAge">Возраст детей</label>
+              <input
+                type="text"
+                id="childrenAge"
+                name="childrenAge"
+                placeholder="3, 7, 12"
+              />
+              <small class="hint">Укажите возраст через запятую</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dateFrom"
+                >Дата заезда <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="dateFrom"
+                name="dateFrom"
+                placeholder="дд.мм.гггг"
+                required
+              />
+              <div class="error-message">Выберите дату заезда</div>
+            </div>
+
+            <div class="form-group">
+              <label for="dateTo"
+                >Дата выезда <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="dateTo"
+                name="dateTo"
+                placeholder="дд.мм.гггг"
+                required
+              />
+              <div class="error-message">Выберите дату выезда</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="comment">Комментарий</label>
+            <textarea
+              id="comment"
+              name="comment"
+              rows="3"
+              placeholder="Ваши пожелания, особые требования..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit">
+            <i class="fas fa-paper-plane"></i> Отправить заявку
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===== JS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
