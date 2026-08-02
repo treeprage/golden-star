@@ -143,7 +143,7 @@ ul {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 10;
   transition: var(--transition);
 }
 
@@ -279,6 +279,7 @@ ul {
 
 /* Стили для видео */
 .hero-video {
+  opacity: 0.8;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -428,7 +429,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 500;
+  font-weight: 450;
   font-size: 1.7rem;
   color: #dbdbd9;
 }
@@ -442,7 +443,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .hero-stats {
@@ -570,22 +571,27 @@ ul {
 }
 
 .about-text p {
-  margin-bottom: 16px;
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  font-weight: 500;
+  margin-bottom: 20px;
+  font-size: clamp(1.2rem, 1.2vw, 1.05rem);
+}
+strong {
+  color: #d4af37;
+  font-weight: 800 !important;
 }
 
 /* ===== ВЫДЕЛЕНИЯ ===== */
 .about-highlight {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 15px;
   margin: 24px 0 32px;
 }
 
 .highlight-item {
   display: flex;
   gap: 15px;
-  padding: 18px 20px;
+  padding: 15px 15px;
   background: var(--sand);
   border-radius: 30px;
   border-left: 3px solid var(--gold);
@@ -598,12 +604,11 @@ ul {
 }
 
 .highlight-item h4 {
-  font-size: 0.95rem;
-  margin-bottom: 2px;
+  font-size: 1rem;
 }
 
 .highlight-item p {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--gray);
   margin: 0;
 }
@@ -686,7 +691,7 @@ ul {
 }
 
 .service-card {
-  background: #ffffffdb;
+  background: #ffffffab;
   padding: 30px 20px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -749,13 +754,21 @@ ul {
 
 .services-cta {
   text-align: center;
+  margin-bottom: -50px;
   margin-top: 40px;
+}
+@media (max-width: 480px) {
+  .services-cta {
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
 }
 
 /* ========================================
    GALLERY
    ======================================== */
 .gallery {
+  opacity: 0.9;
   background: var(--white);
 }
 
@@ -1005,8 +1018,7 @@ ul {
 
 .contacts-info {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 15px;
 }
 
 .contact-item {
@@ -1041,15 +1053,15 @@ ul {
 }
 
 .contact-item h4 {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--gray);
-  margin-bottom: 2px;
 }
 
 .contact-item a {
+  opacity: 0.9;
   display: block;
-  font-weight: 600;
-  color: var(--deep);
+  font-weight: 700;
+  color: #4e6f90;
   font-size: 0.95rem;
 }
 
@@ -1058,8 +1070,8 @@ ul {
 }
 
 .contact-item p {
-  color: var(--deep);
-  font-weight: 500;
+  color: #6e95b9;
+  font-weight: 600;
   font-size: 0.95rem;
 }
 
@@ -1163,9 +1175,8 @@ ul {
 }
 
 .footer-col a {
-  opacity: 0.7;
   transition: var(--transition);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .footer-col a:hover {
@@ -1271,7 +1282,7 @@ ul {
   }
 
   .hero-features .feature {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .hero-buttons {
@@ -1443,7 +1454,7 @@ ul {
   .section-subtitle {
     line-height: 1;
     margin-top: -7px;
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .section {
@@ -1475,7 +1486,7 @@ ul {
   }
 
   .hero-features {
-    gap: 6px 12px;
+    gap: 0px 10px;
   }
 
   .hero-buttons .btn {
@@ -1503,7 +1514,7 @@ ul {
   }
 
   .footer {
-    padding: 36px 0 20px;
+    padding: 15px 0 20px;
   }
 
   .footer-brand .logo {
@@ -1511,9 +1522,9 @@ ul {
   }
 
   .footer-social a {
-    width: 34px;
-    height: 34px;
-    font-size: 0.85rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
   }
 
   /* ---- REVIEWS ---- */
@@ -1591,6 +1602,7 @@ ul {
    MODAL
    ======================================== */
 .modal-overlay {
+  background: #9999994f;
   position: fixed;
   inset: 0;
   z-index: 99;
@@ -1618,6 +1630,7 @@ ul {
 }
 
 .modal {
+  z-index: 99999;
   background: var(--white);
   border-radius: 40px;
   max-width: 720px;
@@ -1664,7 +1677,7 @@ ul {
 
 .modal-header {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 30px;
 }
 
 .modal-icon {
@@ -1682,10 +1695,9 @@ ul {
 }
 
 .modal-title {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   color: var(--deep);
-  margin-bottom: 4px;
+  margin-bottom: -5px;
 }
 
 .modal-subtitle {
@@ -1725,11 +1737,12 @@ ul {
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 12px 16px;
-  border: 2px solid #e8e0d4;
+  font-weight: 600;
+  padding: 10px 15px;
+  border: 2px solid #ffe6c1;
   border-radius: var(--radius);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: var(--transition);
   background: var(--sand-light);
   width: 100%;
@@ -1860,12 +1873,21 @@ ul {
   }
 }
 
+.cta-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 /* ===== АДАПТАЦИЯ МОДАЛЬНОГО ОКНА ===== */
 @media (max-width: 768px) {
   .modal {
     padding: 28px 20px;
     max-height: 95vh;
-    border-radius: 16px;
+    border-radius: 35px;
   }
 
   .form-row {
@@ -1916,7 +1938,7 @@ ul {
   }
 
   .modal-header {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 
   .modal-icon {

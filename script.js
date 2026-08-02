@@ -1,445 +1,483 @@
 // ========================================
-// MOBILE MENU TOGGLE
+// ОПТИМИЗИРОВАННЫЙ JS
 // ========================================
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.querySelector(".mobile-toggle");
-  const nav = document.querySelector(".nav");
 
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      nav.classList.toggle("active");
+(function () {
+  "use strict";
+
+  // Кэширование DOM-элементов
+  const dom = {};
+
+  function cacheElements() {
+    dom.toggle = document.querySelector(".mobile-toggle");
+    dom.nav = document.querySelector(".nav");
+    dom.header = document.querySelector(".header");
+    dom.modal = document.getElementById("bookingModal");
+    dom.modalClose = document.getElementById("modalClose");
+    dom.openButtons = document.querySelectorAll(".open-modal");
+    dom.form = document.getElementById("bookingForm");
+    dom.phone = document.getElementById("phone");
+    dom.video = document.querySelector(".hero-video");
+    dom.videoControl = document.getElementById("videoControl");
+    dom.reviewsGrid = document.getElementById("reviewsGrid");
+    dom.reviewCounter = document.querySelector(".review-counter");
+    dom.reviewCards = dom.reviewsGrid
+      ? dom.reviewsGrid.querySelectorAll(".review-card")
+      : [];
+    dom.heroTitle = document.querySelector(".hero-title");
+    dom.heroSubtitle = document.querySelector(".hero-subtitle");
+  }
+
+  // ========================================
+  // 1. MOBILE MENU
+  // ========================================
+  function initMobileMenu() {
+    if (!dom.toggle || !dom.nav) return;
+
+    dom.toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const isActive = dom.nav.classList.toggle("active");
       const icon = this.querySelector("i");
-      if (nav.classList.contains("active")) {
-        icon.className = "fas fa-times";
-      } else {
-        icon.className = "fas fa-bars";
-      }
+      icon.className = isActive ? "fas fa-times" : "fas fa-bars";
+    });
+
+    document.querySelectorAll(".nav-list a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768 && dom.nav.classList.contains("active")) {
+          dom.nav.classList.remove("active");
+          dom.toggle.querySelector("i").className = "fas fa-bars";
+        }
+      });
     });
   }
 
-  const navLinks = document.querySelectorAll(".nav-list a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (window.innerWidth <= 768) {
-        nav.classList.remove("active");
-        const icon = toggle.querySelector("i");
-        icon.className = "fas fa-bars";
-      }
-    });
-  });
-});
+  // ========================================
+  // 2. HEADER SCROLL (оптимизированный)
+  // ========================================
+  let scrollTimeout;
 
-// ========================================
-// HEADER SCROLL EFFECT
-// ========================================
-window.addEventListener("scroll", function () {
-  const header = document.querySelector(".header");
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
+  function initHeaderScroll() {
+    if (!dom.header) return;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (scrollTimeout) return;
+        scrollTimeout = requestAnimationFrame(() => {
+          dom.header.classList.toggle("scrolled", window.scrollY > 50);
+          scrollTimeout = null;
+        });
+      },
+      { passive: true },
+    );
   }
-});
 
-// ========================================
-// ANIMATED COUNTERS
-// ========================================
-function animateCounters() {
-  const counters = document.querySelectorAll(".stat-number");
+  // ========================================
+  // 3. ANIMATED COUNTERS (ускоренные)
+  // ========================================
+  function initCounters() {
+    const counters = document.querySelectorAll(".stat-number");
+    if (!counters.length) return;
 
-  counters.forEach((counter) => {
-    const target = parseFloat(counter.dataset.count);
-    const isFloat = target % 1 !== 0;
-    const duration = 2000;
-    const stepTime = 16;
-    const steps = duration / stepTime;
-    let current = 0;
-    const increment = target / steps;
+    let animated = false;
 
-    const updateCounter = () => {
-      current += increment;
-      if (current >= target) {
-        counter.textContent = isFloat ? target.toFixed(1) : target;
-        return;
-      }
-      counter.textContent = isFloat ? current.toFixed(1) : Math.floor(current);
-      requestAnimationFrame(updateCounter);
+    const startAnimation = () => {
+      if (animated) return;
+      animated = true;
+
+      counters.forEach((counter) => {
+        const target = parseFloat(counter.dataset.count);
+        const isFloat = target % 1 !== 0;
+        const duration = 1500;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = target * eased;
+
+          counter.textContent = isFloat
+            ? current.toFixed(1)
+            : Math.floor(current);
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = isFloat ? target.toFixed(1) : target;
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+      });
     };
 
-    updateCounter();
-  });
-}
+    // Запуск при загрузке
+    setTimeout(startAnimation, 300);
 
-setTimeout(animateCounters, 500);
+    // Перезапуск при прокрутке к секции
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            startAnimation();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
 
-// ========================================
-// REVIEWS SLIDER
-// ========================================
-let currentReview = 0;
-const reviewsGrid = document.getElementById("reviewsGrid");
-const reviewCards = reviewsGrid
-  ? reviewsGrid.querySelectorAll(".review-card")
-  : [];
-const totalReviews = reviewCards.length;
-const counter = document.querySelector(".review-counter");
-
-function showReview(index) {
-  if (!reviewsGrid || totalReviews === 0) return;
-  const offset = -index * 100;
-  reviewsGrid.style.transform = `translateX(${offset}%)`;
-  reviewsGrid.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
-
-  if (counter) {
-    counter.textContent = `${index + 1} / ${totalReviews}`;
+    const statsSection = document.querySelector(".hero-stats");
+    if (statsSection) observer.observe(statsSection);
   }
-}
 
-function nextReview() {
-  if (totalReviews === 0) return;
-  currentReview = (currentReview + 1) % totalReviews;
-  showReview(currentReview);
-}
+  // ========================================
+  // 4. REVIEWS SLIDER
+  // ========================================
+  function initReviewsSlider() {
+    if (!dom.reviewsGrid || !dom.reviewCards.length) return;
 
-function prevReview() {
-  if (totalReviews === 0) return;
-  currentReview = (currentReview - 1 + totalReviews) % totalReviews;
-  showReview(currentReview);
-}
+    let currentIndex = 0;
+    const total = dom.reviewCards.length;
 
-const nextBtn = document.querySelector(".review-btn.next");
-const prevBtn = document.querySelector(".review-btn.prev");
+    const showSlide = (index) => {
+      dom.reviewsGrid.style.transform = `translateX(-${index * 100}%)`;
+      if (dom.reviewCounter) {
+        dom.reviewCounter.textContent = `${index + 1} / ${total}`;
+      }
+    };
 
-if (nextBtn) nextBtn.addEventListener("click", nextReview);
-if (prevBtn) prevBtn.addEventListener("click", prevReview);
+    const next = () => {
+      currentIndex = (currentIndex + 1) % total;
+      showSlide(currentIndex);
+    };
 
-let autoSlide = setInterval(nextReview, 5000);
+    const prev = () => {
+      currentIndex = (currentIndex - 1 + total) % total;
+      showSlide(currentIndex);
+    };
 
-const sliderContainer = document.querySelector(".reviews-slider");
-if (sliderContainer) {
-  sliderContainer.addEventListener("mouseenter", () => {
-    clearInterval(autoSlide);
-  });
-  sliderContainer.addEventListener("mouseleave", () => {
-    autoSlide = setInterval(nextReview, 5000);
-  });
-}
+    // Кнопки
+    document.querySelector(".review-btn.next")?.addEventListener("click", next);
+    document.querySelector(".review-btn.prev")?.addEventListener("click", prev);
 
-// ========================================
-// SMOOTH SCROLL
-// ========================================
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    const targetId = this.getAttribute("href");
-    if (targetId === "#") return;
+    // Автослайд
+    let autoSlide = setInterval(next, 5000);
 
-    const target = document.querySelector(targetId);
-    if (target) {
-      e.preventDefault();
-      const headerOffset = 80;
-      const targetPosition =
-        target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
+    const container = dom.reviewsGrid.closest(".reviews-slider");
+    if (container) {
+      container.addEventListener("mouseenter", () => clearInterval(autoSlide));
+      container.addEventListener("mouseleave", () => {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(next, 5000);
       });
     }
-  });
-});
 
-// ========================================
-// MODAL WINDOW
-// ========================================
-const modal = document.getElementById("bookingModal");
-const modalClose = document.getElementById("modalClose");
-const openButtons = document.querySelectorAll(".open-modal");
-
-// Открытие модального окна
-openButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-  });
-});
-
-// Закрытие модального окна
-function closeModal() {
-  modal.classList.remove("active");
-  document.body.style.overflow = "";
-}
-
-modalClose.addEventListener("click", closeModal);
-
-// Закрытие по клику на оверлей
-modal.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    closeModal();
+    showSlide(0);
   }
-});
 
-// Закрытие по ESC
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && modal.classList.contains("active")) {
-    closeModal();
+  // ========================================
+  // 5. SMOOTH SCROLL
+  // ========================================
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        if (targetId === "#") return;
+
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          const headerHeight = dom.header?.offsetHeight || 80;
+          const targetPos =
+            target.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+          window.scrollTo({ top: targetPos, behavior: "smooth" });
+        }
+      });
+    });
   }
-});
 
-// ========================================
-// FLATPICKR - ДАТЫ
-// ========================================
-if (typeof flatpickr !== "undefined") {
-  const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // ========================================
+  // 6. MODAL WINDOW
+  // ========================================
+  function initModal() {
+    if (!dom.modal || !dom.modalClose) return;
 
-  const dateFrom = flatpickr("#dateFrom", {
-    locale: "ru",
-    dateFormat: "d.m.Y",
-    minDate: today,
-    defaultDate: today,
-    onChange: function (selectedDates, dateStr, instance) {
-      if (dateStr) {
-        const minDate = new Date(selectedDates[0]);
-        minDate.setDate(minDate.getDate() + 1);
-        dateTo.set("minDate", minDate);
+    const openModal = () => {
+      dom.modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeModal = () => {
+      dom.modal.classList.remove("active");
+      document.body.style.overflow = "";
+    };
+
+    dom.openButtons.forEach((btn) => btn.addEventListener("click", openModal));
+    dom.modalClose.addEventListener("click", closeModal);
+
+    dom.modal.addEventListener("click", (e) => {
+      if (e.target === dom.modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && dom.modal.classList.contains("active")) {
+        closeModal();
+      }
+    });
+  }
+
+  // ========================================
+  // 7. FLATPICKR DATES
+  // ========================================
+  function initFlatpickr() {
+    if (typeof flatpickr === "undefined") return;
+
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const dateFrom = flatpickr("#dateFrom", {
+      locale: "ru",
+      dateFormat: "d.m.Y",
+      minDate: today,
+      defaultDate: today,
+      onChange: (dates) => {
+        if (dates.length) {
+          const minDate = new Date(dates[0]);
+          minDate.setDate(minDate.getDate() + 1);
+          dateTo.set("minDate", minDate);
+          if (
+            dateTo.selectedDates.length &&
+            dateTo.selectedDates[0] < minDate
+          ) {
+            dateTo.clear();
+          }
+        }
+      },
+    });
+
+    const dateTo = flatpickr("#dateTo", {
+      locale: "ru",
+      dateFormat: "d.m.Y",
+      minDate: tomorrow,
+      defaultDate: tomorrow,
+    });
+  }
+
+  // ========================================
+  // 8. FORM VALIDATION
+  // ========================================
+  function initForm() {
+    if (!dom.form) return;
+
+    dom.form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let isValid = true;
+      const required = this.querySelectorAll("[required]");
+
+      required.forEach((field) => {
+        const error = field.parentElement.querySelector(".error-message");
+        field.classList.remove("error");
+        if (error) error.classList.remove("visible");
+
+        const value = field.value.trim();
+
+        if (!value) {
+          isValid = false;
+          field.classList.add("error");
+          if (error) error.classList.add("visible");
+          return;
+        }
+
+        // Email
         if (
-          dateTo.selectedDates.length > 0 &&
-          dateTo.selectedDates[0] < minDate
+          field.type === "email" &&
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
         ) {
-          dateTo.clear();
+          isValid = false;
+          field.classList.add("error");
+          if (error) {
+            error.textContent = "Введите корректный email";
+            error.classList.add("visible");
+          }
         }
-      }
-    },
-  });
 
-  const dateTo = flatpickr("#dateTo", {
-    locale: "ru",
-    dateFormat: "d.m.Y",
-    minDate: tomorrow,
-    defaultDate: tomorrow,
-  });
-}
-
-// ========================================
-// FORM VALIDATION
-// ========================================
-const form = document.getElementById("bookingForm");
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  let isValid = true;
-  const requiredFields = form.querySelectorAll("[required]");
-
-  requiredFields.forEach((field) => {
-    const errorElement = field.parentElement.querySelector(".error-message");
-    field.classList.remove("error");
-    if (errorElement) {
-      errorElement.classList.remove("visible");
-    }
-
-    if (!field.value.trim()) {
-      isValid = false;
-      field.classList.add("error");
-      if (errorElement) {
-        errorElement.classList.add("visible");
-      }
-    }
-
-    // Дополнительная валидация для email
-    if (field.type === "email" && field.value.trim()) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(field.value.trim())) {
-        isValid = false;
-        field.classList.add("error");
-        if (errorElement) {
-          errorElement.textContent = "Пожалуйста, введите корректный email";
-          errorElement.classList.add("visible");
+        // Phone
+        if (field.type === "tel" && !/^[\+\d\s\(\)-]{10,20}$/.test(value)) {
+          isValid = false;
+          field.classList.add("error");
+          if (error) {
+            error.textContent = "Введите корректный номер телефона";
+            error.classList.add("visible");
+          }
         }
-      }
-    }
+      });
 
-    // Валидация телефона
-    if (field.type === "tel" && field.value.trim()) {
-      const phoneRegex = /^[\+\d\s\(\)-]{10,20}$/;
-      if (!phoneRegex.test(field.value.trim())) {
-        isValid = false;
-        field.classList.add("error");
-        if (errorElement) {
-          errorElement.textContent =
-            "Пожалуйста, введите корректный номер телефона";
-          errorElement.classList.add("visible");
-        }
+      if (!isValid) {
+        showToast("Заполните все обязательные поля", "error");
+        return;
       }
-    }
-  });
 
-  if (!isValid) {
-    showToast("Пожалуйста, заполните все обязательные поля", "error");
-    return;
+      showToast("Заявка отправлена! Мы свяжемся с вами.", "success");
+      this.reset();
+      setTimeout(() => {
+        dom.modal?.classList.remove("active");
+        document.body.style.overflow = "";
+      }, 3000);
+    });
   }
 
-  // Успешная отправка
-  showToast(
-    "Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.",
-    "success",
-  );
-  form.reset();
-  setTimeout(closeModal, 3000);
-});
+  // ========================================
+  // 9. PHONE MASK
+  // ========================================
+  function initPhoneMask() {
+    if (!dom.phone) return;
 
-// ========================================
-// TOAST NOTIFICATION
-// ========================================
-function showToast(message, type = "success") {
-  const toast = document.createElement("div");
-  toast.className = `toast ${type} active`;
-  const icon = type === "success" ? "fa-check-circle" : "fa-exclamation-circle";
-  toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
-  document.body.appendChild(toast);
+    dom.phone.addEventListener("input", function () {
+      let value = this.value.replace(/\D/g, "");
+      if (value.length > 11) value = value.slice(0, 11);
 
-  setTimeout(() => {
-    toast.classList.remove("active");
-    setTimeout(() => {
-      toast.remove();
-    }, 400);
-  }, 4000);
-}
-
-// ========================================
-// PHONE MASK (упрощенный)
-// ========================================
-document.getElementById("phone")?.addEventListener("input", function (e) {
-  let value = this.value.replace(/\D/g, "");
-  if (value.length > 11) value = value.slice(0, 11);
-  let formatted = "";
-  if (value.length > 0) {
-    formatted = "+7 (";
-    if (value.length > 1) {
-      formatted += value.slice(1, 4);
-      if (value.length > 4) {
-        formatted += ") " + value.slice(4, 7);
-        if (value.length > 7) {
-          formatted += "-" + value.slice(7, 9);
-          if (value.length > 9) {
-            formatted += "-" + value.slice(9, 11);
+      let formatted = "";
+      if (value.length) {
+        formatted = "+7 (";
+        if (value.length > 1) {
+          formatted += value.slice(1, 4);
+          if (value.length > 4) {
+            formatted += ") " + value.slice(4, 7);
+            if (value.length > 7) {
+              formatted += "-" + value.slice(7, 9);
+              if (value.length > 9) {
+                formatted += "-" + value.slice(9, 11);
+              }
+            }
           }
         }
       }
-    }
+      this.value = formatted || "";
+    });
   }
-  this.value = formatted || "";
-});
 
-// ========================================
-// VIDEO CONTROL (пауза/воспроизведение)
-// ========================================
-document.addEventListener("DOMContentLoaded", function () {
-  const video = document.querySelector(".hero-video");
-  const videoControl = document.getElementById("videoControl");
+  // ========================================
+  // 10. VIDEO CONTROL
+  // ========================================
+  function initVideoControl() {
+    if (!dom.video || !dom.videoControl) return;
 
-  if (video && videoControl) {
-    // Ставим видео на паузу если пользователь кликнул
-    videoControl.addEventListener("click", function () {
-      const icon = this.querySelector("i");
-      if (video.paused) {
-        video.play();
+    dom.videoControl.addEventListener("click", () => {
+      const icon = dom.videoControl.querySelector("i");
+      if (dom.video.paused) {
+        dom.video.play();
         icon.className = "fas fa-pause";
       } else {
-        video.pause();
+        dom.video.pause();
         icon.className = "fas fa-play";
       }
     });
 
-    // Автоматически скрываем кнопку через 3 секунды
-    let hideTimeout;
+    // Автоскрытие
+    let hideTimer;
 
-    function showControl() {
-      videoControl.style.opacity = "1";
-      videoControl.style.transform = "translateY(0)";
-      clearTimeout(hideTimeout);
-      hideTimeout = setTimeout(() => {
-        videoControl.style.opacity = "0.5";
-        videoControl.style.transform = "translateY(10px)";
+    const show = () => {
+      dom.videoControl.style.opacity = "1";
+      dom.videoControl.style.transform = "translateY(0)";
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        dom.videoControl.style.opacity = "0.5";
+        dom.videoControl.style.transform = "translateY(10px)";
       }, 3000);
+    };
+
+    document.addEventListener("mousemove", show, { passive: true });
+    dom.video.addEventListener("mouseenter", show);
+    dom.video.addEventListener("play", () => {
+      dom.videoControl.querySelector("i").className = "fas fa-pause";
+    });
+    dom.video.addEventListener("pause", () => {
+      dom.videoControl.querySelector("i").className = "fas fa-play";
+    });
+    dom.video.addEventListener("ended", () => dom.video.play());
+  }
+
+  // ========================================
+  // 11. HERO ANIMATION (ускоренная)
+  // ========================================
+  function initHeroAnimation() {
+    if (dom.heroTitle) {
+      setTimeout(() => dom.heroTitle.classList.add("visible"), 200);
     }
-
-    // Показываем кнопку при движении мыши
-    document.addEventListener("mousemove", showControl);
-    document.addEventListener("touchstart", showControl);
-
-    // Показываем при наведении на видео
-    video.addEventListener("mouseenter", showControl);
-    video.addEventListener("touchstart", showControl);
-
-    // Скрываем если видео закончилось
-    video.addEventListener("ended", function () {
-      video.play();
-    });
-
-    // Иконка состояния
-    video.addEventListener("play", function () {
-      videoControl.querySelector("i").className = "fas fa-pause";
-    });
-
-    video.addEventListener("pause", function () {
-      videoControl.querySelector("i").className = "fas fa-play";
-    });
+    if (dom.heroSubtitle) {
+      setTimeout(() => dom.heroSubtitle.classList.add("visible"), 400);
+    }
   }
-});
 
-// ========================================
-// АНИМАЦИЯ ПРИ ЗАГРУЗКЕ
-// ========================================
-document.addEventListener("DOMContentLoaded", function () {
-  const title = document.querySelector(".hero-title");
-  const subtitle = document.querySelector(".hero-subtitle");
+  // ========================================
+  // 12. SCROLL ANIMATION (оптимизированная, ускоренная)
+  // ========================================
+  function initScrollAnimation() {
+    const elements = document.querySelectorAll(
+      ".fade-on-scroll, .fade-left, .fade-right, .fade-scale",
+    );
+    if (!elements.length) return;
 
-  // Появление заголовка
-  if (title) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -80px 0px",
+        threshold: 0.05, // Ускоренное появление
+      },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  // ========================================
+  // 13. TOAST
+  // ========================================
+  function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    const icon =
+      type === "success" ? "fa-check-circle" : "fa-exclamation-circle";
+    toast.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.add("active"));
+
     setTimeout(() => {
-      title.classList.add("visible");
-    }, 300);
+      toast.classList.remove("active");
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
   }
 
-  // Появление подзаголовка с задержкой
-  if (subtitle) {
-    setTimeout(() => {
-      subtitle.classList.add("visible");
-    }, 600);
-  }
-});
-// ========================================
-// АНИМАЦИЯ ПРИ СКРОЛЛЕ
-// ========================================
-document.addEventListener("DOMContentLoaded", function () {
-  // Выбираем все элементы с классом для анимации
-  const elements = document.querySelectorAll(
-    ".fade-on-scroll, .fade-left, .fade-right, .fade-scale",
-  );
+  // ========================================
+  // 14. ИНИЦИАЛИЗАЦИЯ
+  // ========================================
+  document.addEventListener("DOMContentLoaded", () => {
+    cacheElements();
+    initMobileMenu();
+    initHeaderScroll();
+    initCounters();
+    initReviewsSlider();
+    initSmoothScroll();
+    initModal();
+    initFlatpickr();
+    initForm();
+    initPhoneMask();
+    initVideoControl();
+    initHeroAnimation();
+    initScrollAnimation();
 
-  // Настройки Observer
-  const options = {
-    root: null, // viewport
-    rootMargin: "0px 0px -100px 0px", // Срабатывает когда элемент чуть выше нижнего края
-    threshold: 0.1, // 10% элемента видно
-  };
-
-  // Создаём Observer
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        // Можно раскомментировать, чтобы после появления не отслеживать
-        // observer.unobserve(entry.target);
-      }
-    });
-  }, options);
-
-  // Начинаем следить за каждым элементом
-  elements.forEach((element) => {
-    observer.observe(element);
+    console.log("⭐ Золотая Звезда — сайт загружен!");
+    console.log("📞 +7 (901) 235-80-02");
+    console.log("🌐 info@bele-star.ru");
   });
-});
-console.log("⭐ Золотая Звезда — сайт загружен!");
-console.log("📞 +7 (901) 235-80-02");
-console.log("🌐 info@bele-star.ru");
+})();
