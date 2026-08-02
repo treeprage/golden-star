@@ -118,10 +118,7 @@
           playsinline
           preload="auto"
         >
-          <source
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
-            type="video/mp4"
-          />
+          <source src="video2.mp4" type="video/mp4" />
           <img
             src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&h=800&fit=crop&crop=center"
             alt="Озеро Белё"
@@ -142,8 +139,11 @@
             ><i class="fas fa-umbrella-beach"></i> Большой пляж</span
           >
           <span class="feature"><i class="fas fa-fire"></i> Кедровые бани</span>
-          <span class="feature"><i class="fas fa-tree"></i> Мангалы</span>
           <span class="feature"><i class="fas fa-ship"></i> Прокат</span>
+          <span class="feature"><i class="fas fa-tree"></i> Мангалы</span>
+          <span class="feature"
+            ><i class="fa-solid fa-utensils"></i> Столовая и бар</span
+          >
         </div>
 
         <div class="hero-buttons">
@@ -258,39 +258,49 @@
             <div class="service-icon"><i class="fas fa-children"></i></div>
             <h3>Детская площадка</h3>
             <p>
-              Безопасная игровая зона для самых маленьких с современным
-              оборудованием
+              Безопасная игровая зона для детей с современной и просторной
+              площадкой
             </p>
             <span class="service-number">01</span>
+          </div>
+
+          <div class="service-card fade-on-scroll delay-5">
+            <div class="service-icon"><i class="fas fa-cubes"></i></div>
+            <h3>Игровая команта</h3>
+            <p>
+              Просторная детская комната с Аниматорами, которые поиграют с
+              вашими детьми
+            </p>
+            <span class="service-number">02</span>
           </div>
 
           <div class="service-card fade-on-scroll delay-2">
             <div class="service-icon"><i class="fas fa-parking"></i></div>
             <h3>Автопарковка</h3>
-            <p>Гарантированная стоянка автотранспорта на территории базы</p>
-            <span class="service-number">02</span>
+            <p>
+              Гарантированная удобная стоянка автотранспорта на территории нашей
+              базы
+            </p>
+            <span class="service-number">03</span>
           </div>
 
           <div class="service-card fade-on-scroll delay-3">
             <div class="service-icon"><i class="fas fa-house-chimney"></i></div>
             <h3>Уютные номера</h3>
             <p>
-              Экологически чистый район на берегу озера с комфортными условиями
+              Экологически чистый район на берегу озера с самыми комфортными
+              условиями
             </p>
-            <span class="service-number">03</span>
+            <span class="service-number">04</span>
           </div>
 
           <div class="service-card fade-on-scroll delay-4">
             <div class="service-icon"><i class="fas fa-fire-burner"></i></div>
-            <h3>Кедровая баня</h3>
-            <p>Настоящая сибирская баня с ароматом кедра и целебным паром</p>
-            <span class="service-number">04</span>
-          </div>
-
-          <div class="service-card fade-on-scroll delay-5">
-            <div class="service-icon"><i class="fas fa-utensils"></i></div>
-            <h3>Мангал &amp; Шатёр</h3>
-            <p>Всё необходимое для пикника на свежем воздухе с друзьями</p>
+            <h3>Кедровые баня</h3>
+            <p>
+              Настоящие сибирские бани на воде, с пантоном и целебным ароматом
+              кедра
+            </p>
             <span class="service-number">05</span>
           </div>
 
@@ -329,7 +339,7 @@
               playsinline
               preload="auto"
             >
-              <source src="video1.mp4" type="video/mp4" />
+              <source src="video1.MOV" type="video/mp4" />
             </video>
             <div class="gallery-overlay">
               <span>Озеро Белё</span>
@@ -342,11 +352,16 @@
             </div>
           </div>
           <div class="gallery-item fade-on-scroll delay-3">
-            <img
-              src="https://images.unsplash.com/photo-1542728925-21b7e99f1c8d?w=400&h=300&fit=crop&crop=center"
-              alt="Закат на озере"
-              loading="lazy"
-            />
+            <video
+              class="gallery-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            >
+              <source src="video3.mp4" type="video/mp4" />
+            </video>
             <div class="gallery-overlay">
               <span>Закаты</span>
             </div>
@@ -358,11 +373,7 @@
             </div>
           </div>
           <div class="gallery-item fade-on-scroll delay-5">
-            <img
-              src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=400&h=300&fit=crop&crop=center"
-              alt="Природа Хакасии"
-              loading="lazy"
-            />
+            <img src="photo5.jpg" alt="Природа" loading="lazy" />
             <div class="gallery-overlay">
               <span>Природа</span>
             </div>
@@ -474,11 +485,9 @@
     <!-- ===== CTA ===== -->
     <section class="cta">
       <div class="cta-bg">
-        <img
-          src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600&h=400&fit=crop&crop=center"
-          alt="Природа Хакасии"
-          loading="lazy"
-        />
+        <video class="cta-video" autoplay muted loop playsinline preload="auto">
+          <source src="video1.MOV" type="video/MOV" />
+        </video>
         <div class="cta-overlay"></div>
       </div>
       <div class="container cta-content fade-on-scroll">
@@ -507,7 +516,7 @@
       <div class="container">
         <div class="section-header fade-on-scroll">
           <span class="section-tag">Контакты</span>
-          <h2 class="section-title">Как нас <span>найти</span></h2>
+          <h2 class="section-title">Как нас <span>найти?</span></h2>
         </div>
 
         <div class="contacts-grid">
@@ -547,11 +556,15 @@
           </div>
 
           <div class="contacts-map fade-left">
-            <div class="map-placeholder">
-              <i class="fas fa-map-marked-alt"></i>
-              <span>Карта: озеро Белё, Хакасия</span>
-              <small>52°27′N 90°8′E</small>
-            </div>
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=90.151960%2C54.696168%2C90.171960%2C54.716168&layer=mapnik&marker=54.706168%2C90.161960"
+              width="100%"
+              height="400"
+              style="border: 0; border-radius: var(--radius)"
+              allowfullscreen="true"
+              loading="lazy"
+            >
+            </iframe>
           </div>
         </div>
       </div>
@@ -626,7 +639,7 @@
           </div>
         </div>
 
-        <div class="footer-bottom fade-on-scroll delay-5">
+        <div class="footer-bottom">
           <span>© 2026 База отдыха «Золотая звезда»</span>
           <span>Номер реестровой записи С192024006546</span>
         </div>
